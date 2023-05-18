@@ -62,6 +62,29 @@ dog1.bark()
 // thisAnimal.call();
 
 // STEP 5
+// class animal {
+//     // DEFINE PROPERTIES
+//     constructor(type, breed, color, height, length){        
+//         this.type = type;
+//         this.breed = breed;
+//         this.color = color;
+//         this.height = height;
+//         this.length = length;
+//     };
+//     // DEFINE METHODS
+//     call = function(){
+//         console.log(`The Animal ${this.type} has been created, this is a ${this.breed}, ${this.color}, ${this.height}, ${this.length} cat.`)
+//     };    
+// };
+// const thisAnimal = new animal('cat', 'Bengal', 'white', '9.1 in.', '18 in.');
+// thisAnimal.call();
+// STEP 6
+for (const property in thisAnimal) {
+    if (Object.hasOwn(thisAnimal, property)) {
+        console.log(`thisAnimal.${property} = ${thisAnimal[property]}`);
+      }
+};
+// STEP 7
 class animal {
     // DEFINE PROPERTIES
     constructor(type, breed, color, height, length){        
@@ -72,21 +95,20 @@ class animal {
         this.length = length;
     };
     // DEFINE METHODS
-    call = function(){
-        console.log(`The Animal ${this.type} has been created, this is a ${this.breed}, ${this.color}, ${this.height}, ${this.length} cat.`)
+    speak = function() {
+        if (this.type === 'dog') {
+            console.log(`The ${this.color} dog is barking!`)}
+        else if (this.type === 'cat') {
+            console.log(`The ${this.color} cat is meowing!`)
+        } else {
+            console.log(`This animal is speaking!`)
+        };        
     };    
 };
 const thisAnimal = new animal('cat', 'Bengal', 'white', '9.1 in.', '18 in.');
-thisAnimal.call();
-// STEP 6
-for (const property in thisAnimal) {
-    if (Object.hasOwn(thisAnimal, property)) {
-        console.log(`thisAnimal.${property} = ${thisAnimal[property]}`);
-      }
-};
-// STEP 7
-
+thisAnimal.speak();
 
 // STEP 8
+
 
 // STEP 9
