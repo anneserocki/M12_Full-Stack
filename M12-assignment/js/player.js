@@ -49,3 +49,42 @@ album2.play()
 album3.play()
 
 console.log(`Your favorite album is: ${jbox.favoriteAlbum()}`)
+
+// Create album instances and add them to the Jukebox
+let albums = [
+    ('Operation Ivy', 'Energy'),
+    ('Blink 182', 'Dude Ranch'),
+    ('New Found Glory', 'Sticks and Stones')
+];
+
+albums.forEach(album => {
+    jbox.addAlbum(album);
+});
+
+// Get HTML elements
+let albumSelect = document.getElementById('albumsDropdown');
+let playButton = document.getElementById('playButton');
+let favoriteButton = document.getElementById('favoriteButton');
+let resultDiv = document.getElementById('result');
+
+// Populate drop-down menu with albums
+albums.forEach((album, index) => {
+    let option = document.createElement('option');
+    option.value = index;
+    option.textContent = `${album.artist} / ${album.title}`;
+    albumSelect.appendChild(option);
+});
+
+
+// Play button click handler
+playButton.addEventListener('click', () => {
+    let selectedIndex = albumSelect.value;
+    let selectedAlbum = Album[selectedIndex];
+    selectedAlbum.play();
+});
+
+// Show favorite album button click handler
+favoriteButton.addEventListener('click', () => {
+    let favoriteAlbum = jbox.favoriteAlbum();
+    resultDiv.textContent = favoriteAlbum.display();
+});
