@@ -1,89 +1,78 @@
 class Jukebox {
-    constructor(albums) {
-        this.albums = []
+    constructor() {
+        this.albums = [];
     }
-    addAlbum = function(album) {
-        this.albums.push(album)
+
+    addAlbum(album) {
+        this.albums.push(album);
     }
-    favoriteAlbum = function() {
-        let max = -1, fav
+
+    favoriteAlbum() {
+        let max = -1;
+        let fav;
         for (let i = 0; i < this.albums.length; i++) {
             if (this.albums[i].played > max) {
-                max = this.albums[i].played
-                fav = this.albums[i]
+                max = this.albums[i].played;
+                fav = this.albums[i];
             }
         }
-        return fav.display()
+        return fav;
     }
 }
 
 class Album {
     constructor(artist, title) {
-        this.artist = artist
-        this.title = title
-        this.played = 0
+        this.artist = artist;
+        this.title = title;
+        this.played = 0;
     }
-    play = function() {
-        this.played += 1
+
+    play() {
+        this.played += 1;
     }
-    display = function() {
-        return `${this.artist} : ${this.title}. The album has been played ${this.played} times.`
+
+    display() {
+        return `${this.artist} : ${this.title}. The album has been played ${this.played} times.`;
     }
 }
 
-var jbox = new Jukebox()
-const album1 = new Album('Operation Ivy', 'Energy')
-const album2 = new Album('Blink 182', 'Dude Ranch')
-const album3 = new Album('New Found Glory', 'Sticks and Stones')
+// CREATE JUKEBOX INSTANCE
+const jbox = new Jukebox();
 
-jbox.addAlbum(album1)
-jbox.addAlbum(album2)
-jbox.addAlbum(album3)
-
-album1.play()
-album2.play()
-album2.play()
-album2.play()
-album2.play()
-album2.play()
-album3.play()
-
-console.log(`Your favorite album is: ${jbox.favoriteAlbum()}`)
-
-// Create album instances and add them to the Jukebox
-let albums = [
-    ('Operation Ivy', 'Energy'),
-    ('Blink 182', 'Dude Ranch'),
-    ('New Found Glory', 'Sticks and Stones')
+// CREATE ALBUM INSTANCES AND ADD THEM TO THE JUKEBOX
+const albums = [
+    new Album('Operation Ivy', 'Energy'),
+    new Album('Blink 182', 'Dude Ranch'),
+    new Album('New Found Glory', 'Sticks and Stones')
 ];
 
 albums.forEach(album => {
     jbox.addAlbum(album);
 });
 
-// Get HTML elements
-let albumSelect = document.getElementById('albumsDropdown');
+// Get HTML ELEMENTS
+let albumSelect = document.getElementById('albums');
 let playButton = document.getElementById('playButton');
 let favoriteButton = document.getElementById('favoriteButton');
 let resultDiv = document.getElementById('result');
 
-// Populate drop-down menu with albums
+// POPULATE DROP-DOWN MENU WITH ALBUMS
 albums.forEach((album, index) => {
     let option = document.createElement('option');
     option.value = index;
-    option.textContent = `${album.artist} / ${album.title}`;
+    option.textContent = `${album.artist} - ${album.title}`;
     albumSelect.appendChild(option);
 });
 
 
-// Play button click handler
+// PLAY BUTTON CLICK HANDLER
 playButton.addEventListener('click', () => {
     let selectedIndex = albumSelect.value;
-    let selectedAlbum = Album[selectedIndex];
+    let selectedAlbum = albums[selectedIndex];
     selectedAlbum.play();
 });
 
-// Show favorite album button click handler
+// SHOW FAVORTITE ALBUM BUTTON CLICK HANDLER
 favoriteButton.addEventListener('click', () => {
     let favoriteAlbum = jbox.favoriteAlbum();
     resultDiv.textContent = favoriteAlbum.display();
